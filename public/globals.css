@@ -1,0 +1,27 @@
+body {
+  background-color: darkgray;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  margin: 10px;
+}
+
+button {
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px;
+  color: whitesmoke;
+  background-color: black;
+  user-select: none;
+}
+
+.button:hover {
+  color: black;
+  background-color: whitesmoke;
+}
+
+.button:active {
+  color: whitesmoke;
+  background-color: black;
+}
