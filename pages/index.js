@@ -7,7 +7,7 @@ export default function Home() {
   const [session, loading] = useSession();
 
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>Gray Owl Coffee</title>
         <link rel="icon" href="/favicon.ico" />

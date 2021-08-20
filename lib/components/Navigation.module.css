@@ -1,4 +1,4 @@
 .navContainer {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 200px;
 }

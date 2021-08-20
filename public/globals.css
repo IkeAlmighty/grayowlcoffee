@@ -3,25 +3,24 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container {
-  margin: 10px;
-}
-
-button {
-  display: inline-block;
-  cursor: pointer;
+input {
+  min-width: 50px;
   padding: 10px;
-  color: whitesmoke;
-  background-color: black;
-  user-select: none;
+  font-size: 16px;
 }
 
-.button:hover {
-  color: black;
-  background-color: whitesmoke;
+.text-right {
+  text-align: right;
 }
 
-.button:active {
+.text-button {
+  text-decoration: none;
   color: whitesmoke;
   background-color: black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  background-color: rgb(104, 90, 90);
 }
