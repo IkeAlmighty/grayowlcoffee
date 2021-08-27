@@ -1,5 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
+import FlexButton from "./FlexButton";
 import styles from "./Navigation.module.css";
 
 export default function Navigation() {
@@ -10,7 +11,6 @@ export default function Navigation() {
     "I think you look great today. Like a fresh latte.",
     "Crem",
     "... Someone, let me out of this computer.",
-    "",
   ];
   useEffect(() => {
     setPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
@@ -20,25 +20,28 @@ export default function Navigation() {
     <div>
       {!loading && !session && (
         <div className={styles.navContainer}>
-          <div>{phrase}</div>
-          <div className="text-button" onClick={() => signIn()}>
-            Click To Login Gray Owl's test website.
-          </div>
+          <FlexButton
+            text="Login"
+            onClick={() => {
+              signIn();
+            }}
+          />
+
+          <div className="text-right p10px">{phrase}</div>
         </div>
       )}
 
       {!loading && session && (
         <div className={styles.navContainer}>
-          <div>
-            {/* Hello {session.user.name.split(" ")[0]} */}
-            <a href="/schedule" className="text-button">
-              Schedule
-            </a>
-          </div>
+          <FlexButton text="Schedule" href="/schedule" />
 
-          <div className="text-button text-right" onClick={() => signOut()}>
-            Logout
-          </div>
+          <FlexButton
+            className="text-right"
+            text="Logout"
+            onClick={() => {
+              signOut();
+            }}
+          />
         </div>
       )}
     </div>

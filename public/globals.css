@@ -11,9 +11,11 @@ input {
 
 .text-right {
   text-align: right;
+  float: right;
 }
 
 .text-button {
+  display: inline-block;
   text-decoration: none;
   color: whitesmoke;
   background-color: black;
@@ -23,4 +25,12 @@ input {
 
 .text-button:hover {
   background-color: rgb(104, 90, 90);
+}
+
+.p10px {
+  padding: 10px;
+}
+
+.m10px {
+  margin: 10px;
 }

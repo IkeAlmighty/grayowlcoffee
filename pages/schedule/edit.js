@@ -1,9 +1,8 @@
-import Navigation from "../../lib/components/Navigation";
+import Navigation from "../../components/Navigation";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
-import PersonSelector from "../../lib/components/schedule/PersonSelector";
-import ShiftSelector from "../../lib/components/schedule/ShiftSelector";
-import RoleEditor from "../../lib/components/schedule/RoleEditor";
+import PersonSelector from "../../components/schedule/PersonSelector";
+
 export default function Schedule() {
   const [session, loading] = useSession();
 

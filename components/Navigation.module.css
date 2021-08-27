@@ -1,0 +1,7 @@
+.navContainer {
+  margin: 5px 0;
+}
+
+.navContainer * {
+  display: inline-block;
+}
