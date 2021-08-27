@@ -8,6 +8,10 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
+    Providers.Slack({
+      clientId: process.env.SLACK_ID,
+      clientSecret: process.env.SLACK_SECRET,
+    }),
     // ...add more providers here
   ],
 

@@ -7,3 +7,8 @@
   cursor: pointer;
   background-color: white;
 }
+
+.calendarDateSquare {
+  width: 100px;
+  height: 100px;
+}
