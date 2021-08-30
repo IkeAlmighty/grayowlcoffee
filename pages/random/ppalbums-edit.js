@@ -56,12 +56,14 @@ export default function EditPPAlbums() {
         {albums.map((album) => (
           <div key={album} className={`${styles.dbItem}`}>
             <div className={styles.dbItemText}>{album}</div>
-            <FlexButton
-              text="Delete"
-              onClick={(e) => {
-                deleteAlbum(album);
-              }}
-            />
+            <div className="text-right">
+              <FlexButton
+                text="Delete"
+                onClick={(e) => {
+                  deleteAlbum(album);
+                }}
+              />
+            </div>
           </div>
         ))}
       </div>
