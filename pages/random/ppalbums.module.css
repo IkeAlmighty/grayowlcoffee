@@ -1,0 +1,28 @@
+.container {
+  height: 90vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container * {
+  margin: 10px;
+}
+
+.dbItem {
+  display: block;
+  text-align: left;
+}
+
+.dbItemText {
+  display: inline-block;
+  padding: 10px;
+  border: black;
+  border-width: 1px;
+  border-style: solid;
+  width: 170px;
+  border: 1px solid black;
+  box-shadow: -3px -3px whitesmoke;
+  background-color: rgb(200, 226, 226);
+}
