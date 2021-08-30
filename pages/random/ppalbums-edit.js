@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums-edit.module.css";
 
 export default function EditPPAlbums() {
@@ -51,20 +52,19 @@ export default function EditPPAlbums() {
         <input type="submit" value="Add Album to Database" />
       </form>
 
-      <form>
+      <div>
         {albums.map((album) => (
           <div key={album} className={`${styles.dbItem}`}>
             <div className={styles.dbItemText}>{album}</div>
-            <input
-              type="button"
-              value="Delete"
+            <FlexButton
+              text="Delete"
               onClick={(e) => {
                 deleteAlbum(album);
               }}
             />
           </div>
         ))}
-      </form>
+      </div>
     </div>
   );
 }
