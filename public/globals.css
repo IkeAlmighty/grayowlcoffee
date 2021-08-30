@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(191, 204, 218);
+  background-color: rgb(148, 158, 168);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -32,6 +32,7 @@ input {
   cursor: pointer;
   border: 1px solid black;
   box-shadow: -3px -3px whitesmoke;
+  margin-right: 10px;
 }
 
 .text-button:hover {

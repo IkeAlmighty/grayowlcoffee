@@ -27,6 +27,8 @@ export default function Navigation() {
             }}
           />
 
+          <FlexButton text="Random Album Picker" href="/random/ppalbums" />
+
           <div className="text-right p10px">{phrase}</div>
         </div>
       )}
@@ -34,6 +36,7 @@ export default function Navigation() {
       {!loading && session && (
         <div className={styles.navContainer}>
           <FlexButton text="Schedule" href="/schedule" />
+          <FlexButton text="Random Album Picker" href="/random/ppalbums" />
 
           <FlexButton
             className="text-right"

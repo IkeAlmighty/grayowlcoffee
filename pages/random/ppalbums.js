@@ -9,8 +9,6 @@ export default function PlausiblyPerfectAlbums() {
 
   const [newAlbumName, setNewAlbumName] = useState("");
 
-  const [databaseIsViewable, showDatabase] = useState(false);
-
   useEffect(() => {
     fetch(`/api/random/albums`)
       .then((res) => res.json())
@@ -21,20 +19,6 @@ export default function PlausiblyPerfectAlbums() {
       });
   }, []);
 
-  function submitNewAlbum() {
-    if (newAlbumName.trim() === "") return;
-
-    console.log(newAlbumName, "< new album name");
-
-    fetch("/api/random/addalbum", {
-      method: "POST",
-      body: JSON.stringify({ album: newAlbumName }),
-    }).then((res) => {
-      setNewAlbumName("");
-      setAlbums([newAlbumName, ...albums]);
-    });
-  }
-
   function pickRandomAlbum(explicit) {
     // if an explicit argumnent is given, treat it as the albums list
     let _albums;
@@ -44,18 +28,10 @@ export default function PlausiblyPerfectAlbums() {
     let album;
     do {
       album = _albums[Math.floor(Math.random() * _albums.length)];
-    } while (album === selectedAlbum);
+    } while (album === selectedAlbum && albums.length > 1);
 
     // set random album as selectedAlbum
     setSelectedAlbum(album);
-  }
-
-  function deleteAlbum(album) {
-    fetch(`/api/random/deletealbum?album=${album}`, {
-      method: "DELETE",
-    }).then((res) => {
-      setAlbums(albums.filter((a) => a !== album));
-    });
   }
 
   return (
@@ -72,43 +48,9 @@ export default function PlausiblyPerfectAlbums() {
       </form>
 
       <FlexButton
-        text="Toggle Album List"
-        onClick={() => showDatabase(!databaseIsViewable)}
+        text="Edit Album Database List"
+        href="/random/ppalbums-edit"
       />
-
-      {databaseIsViewable && (
-        <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              submitNewAlbum();
-            }}
-          >
-            <input
-              type="text"
-              placeholder="add a new album..."
-              value={newAlbumName}
-              onChange={(e) => setNewAlbumName(e.target.value)}
-            />
-            <input type="submit" value="Add Album to Database" />
-          </form>
-
-          <form>
-            {albums.map((album) => (
-              <div key={album} className={`${styles.dbItem}`}>
-                <div className={styles.dbItemText}>{album}</div>
-                <input
-                  type="button"
-                  value="Delete"
-                  onClick={(e) => {
-                    deleteAlbum(album);
-                  }}
-                />
-              </div>
-            ))}
-          </form>
-        </>
-      )}
     </div>
   );
 }
