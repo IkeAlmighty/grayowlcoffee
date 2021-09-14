@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/client";
+import { useSession, signOut } from "next-auth/client";
 import { useEffect, useState } from "react";
 import FlexButton from "./FlexButton";
 import styles from "./Navigation.module.css";
@@ -20,13 +20,6 @@ export default function Navigation() {
     <div>
       {!loading && !session && (
         <div className={styles.navContainer}>
-          <FlexButton
-            text="Login"
-            onClick={() => {
-              signIn();
-            }}
-          />
-
           <FlexButton text="Random Album Picker" href="/random/ppalbums" />
 
           <div className="text-right p10px">{phrase}</div>
