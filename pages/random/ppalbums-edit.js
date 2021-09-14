@@ -1,8 +1,10 @@
+import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums-edit.module.css";
 
 export default function EditPPAlbums() {
+  const [session, loading] = useSession();
   const [albums, setAlbums] = useState([]);
 
   const [newAlbumName, setNewAlbumName] = useState("");
@@ -37,33 +39,37 @@ export default function EditPPAlbums() {
   }
   return (
     <div className={styles.container}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submitNewAlbum();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="add a new album..."
-          value={newAlbumName}
-          onChange={(e) => setNewAlbumName(e.target.value)}
-        />
-        <input type="submit" value="Add Album to Database" />
-      </form>
+      {!loading && session?.isAdmin && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitNewAlbum();
+          }}
+        >
+          <input
+            type="text"
+            placeholder="add a new album..."
+            value={newAlbumName}
+            onChange={(e) => setNewAlbumName(e.target.value)}
+          />
+          <input type="submit" value="Add Album to Database" />
+        </form>
+      )}
 
       <div>
         {albums.map((album) => (
           <div key={album} className={`${styles.dbItem}`}>
             <div className={styles.dbItemText}>{album}</div>
-            <div className="text-right">
-              <FlexButton
-                text="Delete"
-                onClick={(e) => {
-                  deleteAlbum(album);
-                }}
-              />
-            </div>
+            {!loading && session?.isAdmin && (
+              <div className="text-right">
+                <FlexButton
+                  text="Delete"
+                  onClick={(e) => {
+                    deleteAlbum(album);
+                  }}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>

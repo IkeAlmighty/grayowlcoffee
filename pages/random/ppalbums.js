@@ -1,13 +1,14 @@
+import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums.module.css";
 
 export default function PlausiblyPerfectAlbums() {
+  const [session, loading] = useSession();
+
   const [albums, setAlbums] = useState([]);
 
   const [selectedAlbum, setSelectedAlbum] = useState(undefined);
-
-  const [newAlbumName, setNewAlbumName] = useState("");
 
   useEffect(() => {
     fetch(`/api/random/albums`)
@@ -48,7 +49,7 @@ export default function PlausiblyPerfectAlbums() {
       </form>
 
       <FlexButton
-        text="Edit Album Database List"
+        text={`${session?.isAdmin ? "Edit" : "View"} Album Database List`}
         href="/random/ppalbums-edit"
       />
     </div>
