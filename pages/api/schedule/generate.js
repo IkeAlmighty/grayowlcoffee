@@ -1,25 +1,32 @@
 import { connectToDatabase } from "../../../lib/mongodb";
+import { getSession } from "next-auth/client";
 
 export default async (req, res) => {
-  const { db } = connectToDatabase();
-  let { month } = req.body;
+  const session = getSession({ req });
 
-  // read all availabilities
-  let mongoRes = await db.collection("availabilities").find({ month });
-  let availabilities = mongoRes.body;
+  if (session && session.isAdmin) {
+    const { db } = connectToDatabase();
+    let { month } = req.body;
 
-  // generate the schedule based on the availabilities read
-  let schedule = generateSchedule(availabilities);
+    // read all availabilities
+    let mongoRes = await db.collection("availabilities").find({ month });
+    let availabilities = mongoRes.body;
 
-  // store the generated schedule in database
-  // TODO move upsert to different api endpoint
-  await db
-    .collection("schedules")
-    .updateOne({ month }, { $set: { month, schedule } }, { upsert: true });
+    // generate the schedule based on the availabilities read
+    let schedule = generateSchedule(availabilities);
 
-  // return the generated schedule as a json doc
+    // store the generated schedule in database
+    // TODO move upsert to different api endpoint
+    await db
+      .collection("schedules")
+      .updateOne({ month }, { $set: { month, schedule } }, { upsert: true });
 
-  res.end({ schedule });
+    // return the generated schedule as a json doc
+
+    res.end({ schedule });
+  } else {
+    res.end(401);
+  }
 };
 
 function generateSchedule(availabilities) {}
