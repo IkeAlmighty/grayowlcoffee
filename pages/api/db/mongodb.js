@@ -8,22 +8,81 @@ export default async (req, res) => {
 
   if (req.method === "POST") {
     if (session && session.isAdmin) {
-      const { collection, query, field, value } = JSON.parse(req.body);
+      const { collection, query, document, field, value } = JSON.parse(
+        req.body
+      );
+      // delete the _id field since it is not parsed correctly:
+      if (query?._id) delete query._id;
 
-      await db
-        .collection(collection)
-        .updateOne(query, { $set: { [field]: value } }, { upsert: true });
-
-      res.end("operation attempted");
+      if (!field || !value) {
+        await db
+          .collection(collection)
+          .updateOne(query, { $set: document }, { upsert: true });
+      } else {
+        await db
+          .collection(collection)
+          .updateOne(query, { $set: { [field]: value } }, { upsert: true });
+      }
     } else {
       // not signed in as an admin
       res.end(401);
     }
   } else if (req.method === "GET") {
     const { query, field, collection } = req.query;
+    // delete the _id field since it is never parsed correctly:
+    if (query) delete query._id;
 
-    let mongoRes = await db.collection(collection).findOne(JSON.parse(query));
+    // if no collection is defined, then 401
+    if (!collection) {
+      res.status(401).send("Collection must be defined");
+      return;
+    }
 
-    res.json({ data: mongoRes[field] });
+    if (!query) {
+      if (!field) {
+        // return a list of all docs in collection
+        let mongores = await db.collection(collection).find({}).toArray();
+        res.json(mongores);
+      } else {
+        // return a list of all of 'field'
+        // from all docs in collection
+        let mongores = await db.collection(collection).find({}).toArray();
+        let fieldlist = mongores.map((doc) => doc[field]);
+        res.json(fieldlist);
+      }
+    } else {
+      if (!field) {
+        // return all docs matching the query
+        let mongores = await db.collection(collection).find(query).toArray();
+        res.json(mongores);
+      } else {
+        // return all of 'field' from all docs
+        // matching the query
+        let mongores = await db.collection(collection).find(query).toArray();
+        let fieldlist = mongores.map((doc) => doc[field]);
+        res.json(fieldlist);
+      }
+    }
+  } else if (req.method === "DELETE") {
+    if (session && session.isAdmin) {
+      const { document, collection } = JSON.parse(req.body);
+
+      // since this is not parsed correctly, it needs removed
+      // before mongo can read the delete filter:
+      if (document) delete document._id;
+
+      if (!document || !collection) {
+        res.status(400).send("collection and document must be specified");
+      } else {
+        // grab the doc that is being deleted to return it:
+        let deletedDoc = await db.collection(collection).findOne(document);
+        await db.collection(collection).deleteOne(document);
+        res.json(deletedDoc);
+      }
+    } else {
+      res.status(401).send("not authorized");
+    }
   }
+
+  res.status(202).end();
 };
