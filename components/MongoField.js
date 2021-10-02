@@ -2,6 +2,7 @@ import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 
 export default function MongoDoc({
+  initial,
   collection,
   field,
   query,
@@ -45,8 +46,12 @@ export default function MongoDoc({
   }
 
   useEffect(async () => {
-    const val = await readDatabaseValue(collection, field, query);
-    setValue(val);
+    if (!initial) {
+      const val = await readDatabaseValue(collection, field, query);
+      setValue(val);
+    } else {
+      setValue(initial);
+    }
   }, []);
 
   if (session && session.isAdmin) {
