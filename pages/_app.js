@@ -1,4 +1,5 @@
 // import App from "next/app";
+import "bootstrap/dist/css/bootstrap.css";
 import "../public/globals.css";
 import { Provider } from "next-auth/client";
 

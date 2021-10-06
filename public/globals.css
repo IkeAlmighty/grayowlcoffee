@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(148, 158, 168);
+  background-color: #6e826c;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -21,18 +21,6 @@ input[type="button"]:hover {
   opacity: 0.7;
 }
 
-.text-right {
-  text-align: right;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-margin-10px * {
-  margin: 10px;
-}
-
 .text-button {
   display: inline-block;
   text-decoration: none;
@@ -42,6 +30,8 @@ input[type="button"]:hover {
   cursor: pointer;
   border: 1px solid black;
   box-shadow: -3px -3px whitesmoke;
+  margin-top: 5px;
+  margin-bottom: 5px;
   margin-right: 10px;
 }
 
@@ -49,32 +39,31 @@ input[type="button"]:hover {
   opacity: 0.7;
 }
 
-.p10px {
-  padding: 10px;
+.go-container {
+  background-color: rgb(148, 158, 168);
+  max-width: 900px;
+  min-height: 100vh;
+  margin: auto;
 }
 
-.m10px {
-  margin: 10px;
+@media screen and (max-width: 900px) {
+  .go-container {
+    max-width: 95%;
+  }
 }
 
-.va-middle * {
-  vertical-align: middle;
+.with-header {
+  margin-top: 60px;
 }
 
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  width: 90px;
+a {
+  color: whitesmoke;
 }
 
-.float-right {
-  float: right;
+a:hover {
+  color: whitesmoke;
 }
 
-.d-block {
-  display: block;
-}
-
-.d-inlineb {
-  display: inline-block;
+a:visited {
+  color: whitesmoke;
 }

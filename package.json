@@ -8,6 +8,7 @@
     "test-api": "node pages/api/schedule/_schedule.test.js"
   },
   "dependencies": {
+    "bootstrap": "^5.0.0-beta3",
     "jest": "^27.0.6",
     "mongodb": "^3.5.9",
     "next": "latest",
