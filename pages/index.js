@@ -12,15 +12,13 @@ export default function Home() {
 
   return (
     <>
-      <div>
-        <span className={styles.header}>Gray Owl Coffee</span>
-      </div>
-      <div className="go-container with-header">
-        <Head>
-          <title>Gray Owl Coffee</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <Head>
+        <title>Gray Owl Coffee</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <span className={`header`}>Gray Owl Coffee</span>
 
+      <div className="go-container with-header">
         <div className={`text-center ${styles.topic}`}>
           <FlexButton
             className={styles.topicButton}
@@ -37,8 +35,8 @@ export default function Home() {
           />
         </div>
       </div>
-      <footer className={` mt-1 ${styles.footer}`}>
-        <Location className="m-1 d-inline-block" />
+      <footer className={`mt-1 footer`}>
+        <Location className="d-inline-block" />
         <a className="mx-4" href="tel:4057012929">
           (405) 701-2929
         </a>
