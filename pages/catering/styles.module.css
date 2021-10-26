@@ -1,0 +1,17 @@
+.cateringItem {
+  margin: 10px;
+  text-align: center;
+  width: 150px;
+  height: 150px;
+  /* line-height: 150px; */
+  background-color: black;
+  color: whitesmoke;
+  opacity: 0.9;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.cateringItem:hover {
+  opacity: 1;
+}
