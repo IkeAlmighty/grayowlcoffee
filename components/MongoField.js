@@ -42,7 +42,7 @@ export default function MongoDoc({
 
     let json = await res.json();
 
-    return json.data;
+    return json;
   }
 
   useEffect(async () => {
