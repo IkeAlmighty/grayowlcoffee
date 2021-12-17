@@ -1,0 +1,24 @@
+.markdownContainer {
+  max-width: 700px;
+  height: 93vh;
+  margin: auto auto;
+}
+
+.markdownContainer * {
+  border: none;
+  outline: none;
+}
+
+.markdownContainer *:focus {
+  border-right: 1px solid black;
+}
+
+.controlPanel {
+  position: fixed;
+  bottom: 26px;
+  text-align: center;
+}
+
+.controlPanel * {
+  font-size: smaller;
+}

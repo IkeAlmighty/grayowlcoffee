@@ -1,17 +1,21 @@
-.cateringItem {
-  margin: 10px;
+.itemCreator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
   text-align: center;
-  width: 150px;
-  height: 150px;
-  /* line-height: 150px; */
   background-color: black;
-  color: whitesmoke;
-  opacity: 0.9;
-  display: inline-block;
-  cursor: pointer;
-  padding: 5px;
+  opacity: 0.99;
+  padding: 10px 0;
 }
 
-.cateringItem:hover {
-  opacity: 1;
+.itemCreator form input {
+  /* display: block; */
+  margin: 10px auto;
+}
+
+.s3ImageContainer {
+  width: 150px;
+  margin: auto;
 }

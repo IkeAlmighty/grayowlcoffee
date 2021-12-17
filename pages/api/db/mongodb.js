@@ -1,5 +1,6 @@
 import { connectToDatabase } from "../../../lib/mongodb";
 import { getSession } from "next-auth/client";
+import { ObjectID } from "mongodb";
 
 export default async (req, res) => {
   const session = await getSession({ req });
@@ -8,24 +9,25 @@ export default async (req, res) => {
 
   if (req.method === "POST") {
     if (session && session.isAdmin) {
-      const { collection, query, document, field, value } = JSON.parse(
-        req.body
-      );
-      // delete the _id field since it is not parsed correctly:
-      if (query?._id) delete query._id;
+      let { collection, query, document, field, value } = JSON.parse(req.body);
+      // reinitialize the _id field since it is not parsed correctly:
+      if (query?._id) {
+        let objectId = ObjectID(query._id);
+        query._id = objectId;
+      }
 
       if (!field || !value) {
         await db
           .collection(collection)
           .updateOne(query, { $set: document }, { upsert: true });
       } else {
-        await db
+        let res = await db
           .collection(collection)
           .updateOne(query, { $set: { [field]: value } }, { upsert: true });
       }
     } else {
       // not signed in as an admin
-      res.end(401);
+      res.status(401).end();
     }
   } else if (req.method === "GET") {
     const { query, field, collection } = req.query;

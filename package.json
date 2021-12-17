@@ -12,6 +12,7 @@
     "aws-sdk": "^2.1006.0",
     "bootstrap": "^5.0.0-beta3",
     "jest": "^27.0.6",
+    "marked": "^3.0.8",
     "mongodb": "^3.5.9",
     "next": "latest",
     "next-auth": "^3.27.3",

@@ -6,13 +6,13 @@ import { useSession } from "next-auth/client";
 // <Authorized>
 //      <div> This is a secret admin dashboard </div>
 // </Authorized>
-export default function Authorized({ children }) {
+export default function Authorized({ isComponent, children }) {
   const [session, loading] = useSession();
 
   if (loading) return <span>Loading...</span>;
   else {
     if (session && session.isAdmin) return <>{children}</>;
-    if (session && !session.isAdmin)
+    if (session && !session.isAdmin && !isComponent)
       return (
         <>
           <div className="text-center d-block">
@@ -23,6 +23,7 @@ export default function Authorized({ children }) {
           </div>
         </>
       );
-    else return <LoginLogout />;
+    else if (!isComponent) return <LoginLogout />;
+    else return <></>;
   }
 }

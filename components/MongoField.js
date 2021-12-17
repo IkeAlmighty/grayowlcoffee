@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/client";
 import { useEffect, useState } from "react";
 
-export default function MongoDoc({
+export default function MongoField({
   initial,
   collection,
   field,

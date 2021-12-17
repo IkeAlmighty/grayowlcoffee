@@ -1,6 +1,11 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import CateringItem from "../../components/catering/CateringItem";
+import CreateItemModel from "../../components/catering/CreateItemModal";
+import S3Browser from "../../components/S3Browser";
 import S3Image from "../../components/S3Image";
+import S3Upload from "../../components/S3Upload";
+import Authorized from "../../components/Authorized";
 import styles from "./styles.module.css";
 
 export default function Catering({}) {
@@ -8,7 +13,12 @@ export default function Catering({}) {
     "THIS IS A TEST. IGNORE ME, SORRY",
     "LALALALA",
   ]);
+
   const [available, setAvailable] = useState([]);
+  const [showItemCreator, setShowItemCreator] = useState(false);
+  const [newItem, setNewItem] = useState({});
+
+  function createItem(e) {}
 
   function formatOrder() {
     let message = order.reduce((prev, curr) => {
@@ -31,16 +41,6 @@ export default function Catering({}) {
     return await items.json();
   }
 
-  function CateringItem({ name, price, imageKey }) {
-    return (
-      <div className={styles.cateringItem}>
-        {/* <img className="d-block" href="" alt="[picture]" /> */}
-        <S3Image className="d-block" key={imageKey} />
-        {name} | ${price.toFixed(2)}
-      </div>
-    );
-  }
-
   useEffect(async () => {
     let items = await getCateringItems();
     setAvailable(items);
@@ -53,10 +53,24 @@ export default function Catering({}) {
       </Head>
 
       <div className="go-container with-header text-center pt-3">
-        {available.map((item) => (
-          <CateringItem name={item.name} price={item.price} />
-        ))}
-        <form
+        <input
+          className="d-block mx-auto"
+          type="button"
+          value="Create New Item..."
+          onClick={() => {
+            setShowItemCreator(true);
+          }}
+        />
+        {available.map((item) => {
+          return (
+            <CateringItem
+              key={item._id}
+              item={item}
+              imageKey={item.imageKey ? item.imageKey : undefined}
+            />
+          );
+        })}
+        {/* <form
           onSubmit={(e) => {
             e.preventDefault();
             sendBakingRequestToSlack();
@@ -65,7 +79,7 @@ export default function Catering({}) {
           <input type="tel" placeholder="Your Phone #" />
           <input type="text" placeholder="Your Name" />
           <input type="submit" value="Request Catering Order" />
-        </form>
+        </form> */}
       </div>
 
       {/* the header has to be placed at the end so that it covers other elements on scroll: */}
@@ -76,6 +90,10 @@ export default function Catering({}) {
         </a>{" "}
         for questions
       </footer>
+
+      <Authorized>
+        <CreateItemModel onCancel={() => {}} />
+      </Authorized>
     </>
   );
 }

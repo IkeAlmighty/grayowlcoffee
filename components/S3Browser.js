@@ -25,13 +25,7 @@ export default function S3Browser({ onSelect, buttonValue, className }) {
     <div className={className}>
       <S3Upload label="Upload New Image" onUpload={addImageKey} />
       {imageKeys.map((key) => (
-        <div
-          style={{
-            marginBottom: "10px",
-            borderBottom: "solid",
-          }}
-          key={key}
-        >
+        <div key={key}>
           <S3Image imageKey={key} style={{ width: "100%" }} />
           <div style={{ textOverflow: "ellipsis" }}>{key}</div>
           <input
@@ -40,6 +34,7 @@ export default function S3Browser({ onSelect, buttonValue, className }) {
             onClick={() => {
               onSelect(key);
             }}
+            style={{ float: "left" }}
           />
           <input
             type="button"

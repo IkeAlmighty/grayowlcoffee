@@ -1,14 +1,17 @@
 import Head from "next/head";
-import FlexButton from "../components/FlexButton";
 import { useSession } from "next-auth/client";
 import Location from "../components/home/Location";
-import RandomQuote from "../components/home/RandomQuote";
-import Hours from "../components/home/Hours";
-import styles from "./index.module.css";
-import QuoteOfDay from "../components/home/RandomQuote";
+import MongoField from "../components/MongoField";
+import { useEffect, useState } from "react";
+import S3Upload from "../components/S3Upload";
+import S3Image from "../components/S3Image";
+import MarkdownEditor from "../components/markdown/MarkdownEditor";
 
 export default function Home() {
   const [session, loading] = useSession();
+  const [imageKeys, setImageKeys] = useState([]);
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -19,7 +22,8 @@ export default function Home() {
       <span className={`header`}>Gray Owl Coffee</span>
 
       <div className="go-container with-header">
-        <div className={`text-center ${styles.topic}`}>
+        {/* TODO: finish these pages and uncomment */}
+        {/* <div className={`text-center ${styles.topic}`}>
           <FlexButton
             className={styles.topicButton}
             href="/catering"
@@ -30,8 +34,23 @@ export default function Home() {
         <div className={`text-center ${styles.topic}`}>
           <FlexButton
             className={styles.topicButton}
-            href="/catering"
+            href="/events/booking"
             text="Event Booking"
+          />
+        </div> */}
+        <div className="my-3">
+          <MarkdownEditor
+            title="HELLO"
+            onSave={async (payload) => {
+              const body = JSON.stringify({
+                query: { element: "" },
+                document: {},
+                collection: "",
+              });
+              await fetch(`/api/db/mongodb`, { method: "POST", body });
+            }}
+            onPublish={() => {}}
+            isAdmin={session && session.isAdmin}
           />
         </div>
       </div>

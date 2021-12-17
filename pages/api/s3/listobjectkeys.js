@@ -4,16 +4,16 @@ export default async (req, res) => {
   const { limit } = req.query;
 
   const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY,
-    region: process.env.AWS_REGION,
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_SECRET_KEY,
+    region: process.env.S3_REGION,
   });
 
   const listObjects = () =>
     new Promise((resolve, reject) => {
       s3.listObjectsV2(
         {
-          Bucket: process.env.AWS_BUCKET_NAME,
+          Bucket: process.env.S3_BUCKET_NAME,
           MaxKeys: limit,
         },
         (err, data) => {
