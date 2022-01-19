@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useSession } from "next-auth/client";
 import Location from "../components/home/Location";
+import StripeProduct from "../components/StripeProduct";
 
 export default function Home() {
   const [session, loading] = useSession();
@@ -13,7 +14,14 @@ export default function Home() {
       </Head>
       <span className={`header`}>Gray Owl Coffee</span>
 
-      <div className="go-container with-header"></div>
+      <div className="go-container with-header">
+        <StripeProduct
+          name="Product"
+          imageUrl={
+            "https://cdn.mos.cms.futurecdn.net/YDFk8cgmSKu8VYFVedUQ8j.jpg"
+          }
+        />
+      </div>
       <footer className={`mt-1 footer`}>
         <Location className="d-inline-block" />
         <a className="mx-4" href="tel:4057012929">

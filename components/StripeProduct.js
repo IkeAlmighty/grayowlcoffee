@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import styles from "./StripeProduct.module.css";
 
-export default async function StripeProduct({ priceId, imageUrl }) {
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+
+export default function StripeProduct({ priceId, imageUrl, name }) {
   const [processingPayment, setProcessingPayment] = useState(false);
-
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
   async function createCheckoutSession() {
     setProcessingPayment(true);
@@ -27,5 +28,16 @@ export default async function StripeProduct({ priceId, imageUrl }) {
 
   //TODO: imple the view per product
   //TODO: imple more precise controls on quantity bought of the item
-  return <></>;
+  return (
+    <div className={`${styles.card}`}>
+      <div className="row my-2 text-center">
+        <div className="col">{name}</div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <img src={imageUrl} />
+        </div>
+      </div>
+    </div>
+  );
 }
