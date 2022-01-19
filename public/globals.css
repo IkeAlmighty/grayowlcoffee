@@ -48,7 +48,7 @@ input[type="button"]:hover {
 
 @media screen and (max-width: 900px) {
   .go-container {
-    max-width: 95%;
+    max-width: 100%;
   }
 }
 

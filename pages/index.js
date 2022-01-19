@@ -15,12 +15,11 @@ export default function Home() {
       <span className={`header`}>Gray Owl Coffee</span>
 
       <div className="go-container with-header">
-        <StripeProduct
-          name="Product"
-          imageUrl={
-            "https://cdn.mos.cms.futurecdn.net/YDFk8cgmSKu8VYFVedUQ8j.jpg"
-          }
-        />
+        <div>Latest Insta Post</div>
+        <div>Currently Playing on Spotify</div>
+        <div>HashTag Div 1</div>
+        <div>HashTag Div 2</div>
+        <div>FAQ</div>
       </div>
       <footer className={`mt-1 footer`}>
         <Location className="d-inline-block" />
