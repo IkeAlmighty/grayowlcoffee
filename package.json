@@ -14,14 +14,16 @@
     "aws-sdk": "^2.1006.0",
     "bootstrap": "^5.0.0-beta3",
     "jest": "^27.0.6",
-    "marked": "^3.0.8",
+    "marked": "^4.0.10",
     "mongodb": "^3.5.9",
     "next": "latest",
     "next-auth": "^3.27.3",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
+    "query-string": "^7.1.0",
     "react": "^17.0.2",
     "react-calendar": "^3.5.0",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "spotify-web-api-node": "^5.0.2"
   },
   "license": "MIT"
 }
