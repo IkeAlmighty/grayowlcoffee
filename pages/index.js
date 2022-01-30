@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useSession } from "next-auth/client";
 import Location from "../components/home/Location";
-import StripeProduct from "../components/StripeProduct";
+import Spotify from "../components/home/Spotify";
 
 export default function Home() {
   const [session, loading] = useSession();
@@ -16,7 +16,7 @@ export default function Home() {
 
       <div className="go-container with-header">
         <div>Latest Insta Post</div>
-        <div>Currently Playing on Spotify</div>
+        <Spotify />
         <div>HashTag Div 1</div>
         <div>HashTag Div 2</div>
         <div>FAQ</div>
