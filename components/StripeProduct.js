@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import styles from "./StripeProduct.module.css";
 
+console.log(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 export default function StripeProduct({ priceId, imageUrl, name }) {
