@@ -1,0 +1,8 @@
+.container {
+  border: solid black 2px;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: whitesmoke;
+  box-shadow: -5px 5px black;
+  max-width: 600px;
+}

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Authorized from "../../components/Authorized";
 import MongoField from "../../components/MongoField";
+import S3Upload from "../../components/S3Upload";
+import S3Image from "../../components/S3Image";
 import styles from "./styles.module.css";
 
 export default function Admin() {
@@ -111,6 +113,25 @@ export default function Admin() {
           </div>
         );
       })}
+
+      <S3Upload
+        label="Choose Marquee Image"
+        onUpload={(val) => {
+          console.log(val);
+        }}
+      />
+      <span className="text-white mx-2">
+        (make sure to name the file marqueeimg.jpeg, until Isaac fixes this)
+      </span>
+      <div style={{ maxWidth: "400px", margin: "10px" }}>
+        <S3Image imageKey="marqueeimg.jpeg" />
+      </div>
+
+      <div className="m-2">
+        <a href="/admin/events">
+          <h3>Click Here to Manage Shop Events</h3>
+        </a>
+      </div>
     </Authorized>
   );
 }

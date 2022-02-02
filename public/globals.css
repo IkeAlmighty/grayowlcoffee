@@ -12,7 +12,7 @@ input {
 input[type="submit"],
 input[type="button"] {
   border: 1px solid black;
-  box-shadow: -3px -3px darkslategray;
+  box-shadow: -3px 3px darkslategray;
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@ input[type="button"]:hover {
   padding: 10px;
   cursor: pointer;
   border: 1px solid black;
-  box-shadow: -3px -3px whitesmoke;
+  box-shadow: -3px 3px whitesmoke;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 10px;
@@ -40,8 +40,8 @@ input[type="button"]:hover {
 }
 
 .go-container {
-  background-color: rgb(148, 158, 168);
-  max-width: 900px;
+  /* background-color: rgb(148, 158, 168); */
+  width: 900px;
   min-height: 100vh;
   margin: auto;
 }
