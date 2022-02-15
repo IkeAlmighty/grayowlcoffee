@@ -1,7 +1,14 @@
-.navContainer {
-  margin: 5px 0;
+@media screen and (max-width: 900px) {
+  .leftImg {
+    display: none;
+  }
 }
 
-.navContainer * {
-  display: inline-block;
+.leftImg {
+  float: left;
+  border: solid 1px;
+}
+
+.rightImg {
+  float: right;
 }

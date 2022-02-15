@@ -17,29 +17,9 @@ export default function Navigation() {
   }, []);
 
   return (
-    <div>
-      {!loading && !session && (
-        <div className={styles.navContainer}>
-          <FlexButton text="Random Album Picker" href="/random/ppalbums" />
-
-          <div className="text-right p10px">{phrase}</div>
-        </div>
-      )}
-
-      {!loading && session && (
-        <div className={styles.navContainer}>
-          <FlexButton text="Schedule" href="/schedule" />
-          <FlexButton text="Random Album Picker" href="/random/ppalbums" />
-
-          <FlexButton
-            className="text-right"
-            text="Logout"
-            onClick={() => {
-              signOut();
-            }}
-          />
-        </div>
-      )}
+    <div className="header">
+      <img src="/headerimg.jpeg" alt="/!\" className={styles.leftImg} />
+      <img src="/headerimg.jpeg" alt="/!\" className={styles.rightImg} />
     </div>
   );
 }
