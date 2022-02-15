@@ -15,21 +15,25 @@ export default function Home({ events }) {
         <title>Gray Owl Coffee</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <span className={`header`}>Gray Owl Coffee</span>
-      {/* <Navigation /> */}
+      {/* <span className={`header`}>Gray Owl Coffee</span> */}
+      <Navigation />
       <div className="go-container with-header">
         <MarqueeImage />
 
         {/* event list: */}
-        <div className="mx-auto w-100">
-          {events.map((event) => (
-            <EventCard
-              title={event.title}
-              detailsMarkdown={event.details}
-              datetime={event.datetime}
-              imageKey={event.imageKey}
-            />
-          ))}
+        <div className="mx-auto w-100 container">
+          <div className="row">
+            {events.map((event) => (
+              <div className="col-lg-6">
+                <EventCard
+                  title={event.title}
+                  detailsMarkdown={event.details}
+                  datetime={event.datetime}
+                  imageKey={event.imageKey}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
