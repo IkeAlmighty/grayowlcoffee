@@ -1,5 +1,6 @@
 import { marked } from "marked";
 import S3Image from "./S3Image";
+import { prettifyTime } from "../lib/datetime";
 import styles from "./EventCard.module.css";
 
 export default function EventCard({
@@ -12,22 +13,13 @@ export default function EventCard({
     return { __html: detailsMarkdown ? marked(detailsMarkdown) : "" };
   }
 
-  function prettifyTime() {
-    if (!datetime) return "Invalid Time";
-    const date = new Date(datetime);
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let pmAm = hours > 12 ? "pm" : "am";
-    return `${hours % 12}:${minutes}${pmAm}`;
-  }
-
   return (
     <div className={styles.container}>
       <h2>{title}</h2>
       {imageKey ? <S3Image imageKey={imageKey} /> : ""}
-      <div dangerouslySetInnerHTML={createMarkup()} />
+      <div className="my-3" dangerouslySetInnerHTML={createMarkup()} />
       <div>{new Date(datetime).toLocaleDateString()}</div>
-      <div>{prettifyTime()}</div>
+      <div>{prettifyTime(datetime)}</div>
     </div>
   );
 }
