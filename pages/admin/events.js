@@ -125,9 +125,8 @@ export default function Events() {
       <hr />
       <div className="mx-auto">
         {events.map((event) => (
-          <div className={styles.cardContainer}>
+          <div className={styles.cardContainer} key={JSON.stringify(event)}>
             <EventCard
-              key={JSON.stringify(event)}
               title={event.title}
               detailsMarkdown={event.details}
               datetime={event.datetime}
