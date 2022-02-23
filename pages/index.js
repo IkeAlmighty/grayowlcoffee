@@ -5,6 +5,9 @@ import MarqueeImage from "../components/MarqueeImage";
 import EventCard from "../components/EventCard";
 import { connectToDatabase } from "../lib/mongodb";
 import Navigation from "../components/Navigation";
+import S3Image from "../components/S3Image";
+import FlexButton from "../components/FlexButton";
+import styles from "./index.module.css";
 
 export default function Home({ events }) {
   const [session, loading] = useSession();
@@ -19,6 +22,26 @@ export default function Home({ events }) {
       <Navigation />
       <div className="go-container with-header">
         <MarqueeImage />
+        <hr />
+
+        {/* various doodads */}
+        <div className="mx-3 text-center">
+          {/* <h1 className="mt-3">Catering Menu</h1> */}
+          {/* <S3Image imageKey={"catering-menu.jpeg"} /> */}
+          <div className={`${styles.cateringContainer}`}>
+            <a href="tel:4057012929">Call Us</a> to make a catering order.
+          </div>
+
+          <h3>Random Owlian Things</h3>
+          <FlexButton
+            className="my-3"
+            href="/random/ppalbums"
+            text="Plausibly Perfect Albums"
+          />
+        </div>
+
+        {/* Spacer Div: */}
+        <div style={{ height: "200px" }} />
 
         {/* event list: */}
         <div className="mx-auto w-100 container">

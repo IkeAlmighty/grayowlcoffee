@@ -1,12 +1,4 @@
-.layout {
-}
-
-.topic {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-}
-
-.topicButton {
-  width: 200px;
-  font-size: 1.2rem;
+.cateringContainer {
+  font-size: 2rem;
+  margin-bottom: 200px;
 }
