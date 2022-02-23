@@ -1,7 +1,6 @@
 import { connectToDatabase } from "../../lib/mongodb";
 import { ObjectId } from "mongodb";
 import Authorized from "../../components/Authorized";
-import GrayOwlHeader from "../../components/GrayOwlHeader";
 import MongoField from "../../components/MongoField";
 
 export default function Order({ order }) {
