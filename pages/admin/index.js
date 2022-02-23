@@ -136,10 +136,26 @@ export default function Admin({ session }) {
           }}
         />
         <span className="text-white bg-danger mx-2">
-          (make sure to name the file marqueeimg.jpeg, until Isaac fixes this)
+          (make sure to name the file 'marqueeimg.jpeg', until Isaac fixes this)
         </span>
         <div style={{ maxWidth: "400px", margin: "10px" }}>
           <S3Image imageKey="marqueeimg.jpeg" />
+        </div>
+
+        <hr />
+
+        <S3Upload
+          label="Choose Catering Image"
+          onUpload={(val) => {
+            console.log(val);
+          }}
+        />
+        <span className="text-white bg-danger mx-2">
+          (make sure to name the file 'catering-img.jpeg', until Isaac fixes
+          this)
+        </span>
+        <div style={{ maxWidth: "400px", margin: "10px" }}>
+          <S3Image imageKey="catering-img.jpeg" />
         </div>
 
         <div className="m-2">
