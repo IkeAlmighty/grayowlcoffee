@@ -6,12 +6,17 @@
 
 .leftImg {
   float: left;
-  border: solid 1px;
   text-align: center;
+  height: 100%;
+  transform: scaleX(-1);
 }
 
 .rightImg {
   float: right;
-  border: solid 1px;
   text-align: center;
+  height: 100%;
+}
+
+.headerWords {
+  font-size: 2rem;
 }

@@ -18,8 +18,9 @@ export default function Navigation() {
 
   return (
     <div className="header">
-      <img src="/headerimg.jpeg" alt="/!\" className={styles.leftImg} />
-      <img src="/headerimg.jpeg" alt="/!\" className={styles.rightImg} />
+      <img src="/headerimg.png" alt="/!\" className={styles.leftImg} />
+      <span className={styles.headerWords}>Gray Owl Coffee</span>
+      <img src="/headerimg.png" alt="/!\" className={styles.rightImg} />
     </div>
   );
 }
