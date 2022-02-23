@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { getSession } from "next-auth/client";
 import Authorized from "../../components/Authorized";
 import MongoField from "../../components/MongoField";
 import S3Upload from "../../components/S3Upload";
 import S3Image from "../../components/S3Image";
 import styles from "./index.module.css";
 
-export default function Admin() {
+export default function Admin({ session }) {
   const [admins, setAdmins] = useState([]);
 
   const [newName, setNewName] = useState("");
@@ -57,90 +58,100 @@ export default function Admin() {
 
   return (
     <Authorized>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          addAdmin();
-        }}
-      >
+      <div className="container my-3">
+        <h2>
+          Welcome to the ADMINISTRATION console, Barista-
+          {session?.user.name.split(" ")[1]}
+        </h2>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            addAdmin();
+          }}
+        >
+          <input
+            id="newName"
+            type="text"
+            placeholder="name"
+            value={newName}
+            onChange={(e) => {
+              setNewName(e.target.value);
+            }}
+          />
+          <input
+            type="email"
+            placeholder="email"
+            value={newEmail}
+            onChange={(e) => {
+              setNewEmail(e.target.value);
+            }}
+          />
+          <input type="submit" value="Add Admin" />
+        </form>
+        {showAdminPanel &&
+          admins.map((admin) => {
+            let query = { email: admin.email };
+            return (
+              <div key={admin.email} className={styles.adminInfo}>
+                <div className={styles.adminFormElement}>
+                  <MongoField
+                    initial={admin.name}
+                    collection="admin-users"
+                    query={query}
+                    field="name"
+                  />
+                </div>
+                |
+                <div className={styles.adminFormElement}>
+                  <MongoField
+                    initial={admin.email}
+                    collection="admin-users"
+                    query={query}
+                    field="email"
+                  />
+                </div>
+                <div className={styles.adminFormElement}>
+                  <input
+                    type="button"
+                    value="Delete"
+                    onClick={() => {
+                      removeAdmin(admin);
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         <input
-          id="newName"
-          type="text"
-          placeholder="name"
-          value={newName}
-          onChange={(e) => {
-            setNewName(e.target.value);
+          onClick={() => setShowAdminPanel(!showAdminPanel)}
+          type="button"
+          value={`${showAdminPanel ? "Hide" : "Show"} Users`}
+        />
+        <hr />
+
+        <S3Upload
+          label="Choose Marquee Image"
+          onUpload={(val) => {
+            console.log(val);
           }}
         />
-        <input
-          type="email"
-          placeholder="email"
-          value={newEmail}
-          onChange={(e) => {
-            setNewEmail(e.target.value);
-          }}
-        />
-        <input type="submit" value="Add Admin" />
-      </form>
-      {showAdminPanel &&
-        admins.map((admin) => {
-          let query = { email: admin.email };
-          return (
-            <div key={admin.email} className={styles.adminInfo}>
-              <div className={styles.adminFormElement}>
-                <MongoField
-                  initial={admin.name}
-                  collection="admin-users"
-                  query={query}
-                  field="name"
-                />
-              </div>
-              |
-              <div className={styles.adminFormElement}>
-                <MongoField
-                  initial={admin.email}
-                  collection="admin-users"
-                  query={query}
-                  field="email"
-                />
-              </div>
-              <div className={styles.adminFormElement}>
-                <input
-                  type="button"
-                  value="Delete"
-                  onClick={() => {
-                    removeAdmin(admin);
-                  }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      <input
-        onClick={() => setShowAdminPanel(!showAdminPanel)}
-        type="button"
-        value={`${showAdminPanel ? "Hide" : "Show"} Users`}
-      />
-      <hr />
+        <span className="text-white bg-danger mx-2">
+          (make sure to name the file marqueeimg.jpeg, until Isaac fixes this)
+        </span>
+        <div style={{ maxWidth: "400px", margin: "10px" }}>
+          <S3Image imageKey="marqueeimg.jpeg" />
+        </div>
 
-      <S3Upload
-        label="Choose Marquee Image"
-        onUpload={(val) => {
-          console.log(val);
-        }}
-      />
-      <span className="text-white mx-2">
-        (make sure to name the file marqueeimg.jpeg, until Isaac fixes this)
-      </span>
-      <div style={{ maxWidth: "400px", margin: "10px" }}>
-        <S3Image imageKey="marqueeimg.jpeg" />
-      </div>
-
-      <div className="m-2">
-        <a href="/admin/events">
-          <h3>Click Here to Manage Shop Events</h3>
-        </a>
+        <div className="m-2">
+          <a href="/admin/events">
+            <h3>Click Here to Manage Shop Events</h3>
+          </a>
+        </div>
       </div>
     </Authorized>
   );
+}
+
+export async function getServerSideProps(context) {
+  return { props: { session: await getSession(context) } };
 }
