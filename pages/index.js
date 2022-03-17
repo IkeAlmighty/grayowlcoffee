@@ -36,7 +36,7 @@ export default function Home({ events }) {
           <FlexButton
             className="my-3"
             href="/random/ppalbums"
-            text="Plausibly Perfect Albums"
+            text="'Plausibly Perfect' Albums"
           />
         </div>
 
