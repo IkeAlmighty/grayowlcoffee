@@ -1,17 +1,13 @@
 import Head from "next/head";
-import { useSession } from "next-auth/client";
 import Location from "../components/home/Location";
 import MarqueeImage from "../components/MarqueeImage";
 import EventCard from "../components/EventCard";
 import { connectToDatabase } from "../lib/mongodb";
 import Navigation from "../components/Navigation";
-import S3Image from "../components/S3Image";
 import FlexButton from "../components/FlexButton";
 import styles from "./index.module.css";
 
 export default function Home({ events }) {
-  const [session, loading] = useSession();
-
   return (
     <>
       <Head>
