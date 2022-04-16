@@ -1,3 +1,6 @@
+import S3Upload from "../S3Upload";
+import S3Image from "../S3Image";
+
 export default function CreateItemModel({ onCancel, onSubmit }) {
   return (
     <div className={styles.itemCreator}>
