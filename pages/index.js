@@ -43,7 +43,7 @@ export default function Home({ events }) {
         <div className="mx-auto w-100 container">
           <div className="row">
             {events.map((event) => (
-              <div className="col-lg-6">
+              <div key={event._id} className="col-lg-6">
                 <EventCard
                   title={event.title}
                   detailsMarkdown={event.details}
@@ -71,8 +71,11 @@ export async function getServerSideProps(context) {
 
   const events = await db
     .collection("events")
-    .find({})
-    .project({ _id: 0 })
+    .aggregate([
+      {
+        $project: { _id: { $toString: "$_id" } },
+      },
+    ])
     .toArray();
 
   return { props: { events } };
