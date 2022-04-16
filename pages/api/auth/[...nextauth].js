@@ -5,9 +5,13 @@ import { connectToDatabase } from "../../../lib/mongodb";
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
-    Providers.Slack({
-      clientId: process.env.SLACK_CLIENT_ID,
-      clientSecret: process.env.SLACK_CLIENT_SECRET,
+    // Providers.Slack({
+    //   clientId: process.env.SLACK_CLIENT_ID,
+    //   clientSecret: process.env.SLACK_CLIENT_SECRET,
+    // }),
+    Providers.Google({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
     // ...add more providers here
   ],
