@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../../lib/mongodb";
 import { getSession } from "next-auth/client";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const session = getSession({ req });
 
   if (session && session.isAdmin) {
@@ -27,6 +27,6 @@ export default async (req, res) => {
   } else {
     res.end(401);
   }
-};
+}
 
 function generateSchedule(availabilities) {}

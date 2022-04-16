@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const { limit } = req.query;
 
   const s3 = new AWS.S3({
@@ -26,4 +26,4 @@ export default async (req, res) => {
   let data = await listObjects();
   let keys = data.Contents.map((obj) => obj.Key);
   res.status(200).json(keys);
-};
+}

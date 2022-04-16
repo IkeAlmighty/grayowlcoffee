@@ -2,7 +2,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 import { getSession } from "next-auth/client";
 import { ObjectID } from "mongodb";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const session = await getSession({ req });
 
   const { db } = await connectToDatabase();
@@ -87,4 +87,4 @@ export default async (req, res) => {
   }
 
   res.status(202).end();
-};
+}

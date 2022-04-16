@@ -1,7 +1,7 @@
 import SpotifyWebApi from "spotify-web-api-node";
 import fetch from "node-fetch";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const base64Credentials = Buffer.from(
     process.env.SPOTIFY_ID + ":" + process.env.SPOTIFY_SECRET
   ).toString("base64");
@@ -20,4 +20,4 @@ export default async (req, res) => {
   console.log(json);
 
   res.status(200).send(json.access_token);
-};
+}

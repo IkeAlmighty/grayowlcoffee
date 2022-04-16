@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const s3 = new AWS.S3({
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_SECRET_KEY,
@@ -17,4 +17,4 @@ export default async (req, res) => {
   });
 
   res.status(200).json(post);
-};
+}

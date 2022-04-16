@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const { key } = req.query;
 
   const s3 = new AWS.S3({
@@ -15,4 +15,4 @@ export default async (req, res) => {
   });
 
   res.status(200).send(url);
-};
+}

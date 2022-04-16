@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../../lib/mongodb";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const { db } = await connectToDatabase();
 
   const { method } = req;
@@ -38,4 +38,4 @@ export default async (req, res) => {
   } else {
     res.status(400).end();
   }
-};
+}

@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import querystring from "query-string";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const redirect_uri =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
@@ -21,4 +21,4 @@ export default async (req, res) => {
   res.end(
     `<script>document.location = "https://accounts.spotify.com/authorize?${params}"</script>`
   );
-};
+}

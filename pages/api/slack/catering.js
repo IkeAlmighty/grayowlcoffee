@@ -2,7 +2,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 import { sendToSlack } from "../../../lib/slack";
 //FIXME Bad actors (bots!) could send weird shit to the slack channel
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const { channel, message } = JSON.parse(req.body);
   const { db } = await connectToDatabase();
 
@@ -18,4 +18,4 @@ export default async (req, res) => {
   );
 
   res.status(slackRes.ok ? 200 : 400).end();
-};
+}

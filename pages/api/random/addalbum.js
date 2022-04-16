@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../../lib/mongodb";
 import { getSession } from "next-auth/client";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   const session = await getSession({ req });
   if (session && session.isAdmin) {
     const { db } = await connectToDatabase();
@@ -14,4 +14,4 @@ export default async (req, res) => {
     // not signed in as an admin
     res.end(401);
   }
-};
+}
