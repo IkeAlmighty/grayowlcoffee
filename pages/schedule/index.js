@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Authorized from "../../components/Authorized";
 import Navigation from "../../components/Navigation";
 
@@ -7,12 +8,12 @@ export default function Schedule() {
       <Navigation />
 
       <Authorized>
-        <a className="text-button" href="/schedule/edit">
-          Edit Shedule
-        </a>
-        <a className="text-button" href="/schedule/read">
-          Read Schedule
-        </a>
+        <Link href="/schedule/edit">
+          <a className="text-button">Edit Shedule</a>
+        </Link>
+        <Link href="/schedule/read">
+          <a className="text-button">Read Schedule</a>
+        </Link>
       </Authorized>
     </div>
   );
