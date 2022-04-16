@@ -5,6 +5,7 @@ import MongoField from "../../components/MongoField";
 import S3Upload from "../../components/S3Upload";
 import S3Image from "../../components/S3Image";
 import styles from "./index.module.css";
+import Link from "next/link";
 
 export default function Admin({ session }) {
   const [admins, setAdmins] = useState([]);
@@ -51,9 +52,13 @@ export default function Admin({ session }) {
     return json;
   }
 
-  useEffect(async () => {
-    let res = await getAdmins();
-    setAdmins(res);
+  useEffect(() => {
+    async function fetchAndSetAdmins() {
+      let res = await getAdmins();
+      setAdmins(res);
+    }
+
+    fetchAndSetAdmins();
   }, []);
 
   return (
@@ -136,7 +141,8 @@ export default function Admin({ session }) {
           }}
         />
         <span className="text-white bg-danger mx-2">
-          (make sure to name the file 'marqueeimg.jpeg', until Isaac fixes this)
+          (make sure to name the file &apos;marqueeimg.jpeg&apos;, until Isaac
+          fixes this)
         </span>
         <div style={{ maxWidth: "400px", margin: "10px" }}>
           <S3Image imageKey="marqueeimg.jpeg" />
@@ -151,17 +157,19 @@ export default function Admin({ session }) {
           }}
         />
         <span className="text-white bg-danger mx-2">
-          (make sure to name the file 'catering-img.jpeg', until Isaac fixes
-          this)
+          (make sure to name the file &apos;catering-img.jpeg&apos;, until Isaac
+          fixes this)
         </span>
         <div style={{ maxWidth: "400px", margin: "10px" }}>
           <S3Image imageKey="catering-img.jpeg" />
         </div>
 
         <div className="m-2">
-          <a href="/admin/events">
-            <h3>Click Here to Manage Shop Events</h3>
-          </a>
+          <Link href="/admin/events">
+            <a>
+              <h3>Click Here to Manage Shop Events</h3>
+            </a>
+          </Link>
         </div>
       </div>
     </Authorized>
