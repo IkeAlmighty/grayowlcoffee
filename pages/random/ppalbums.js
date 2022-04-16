@@ -10,14 +10,17 @@ export default function PlausiblyPerfectAlbums() {
 
   const [selectedAlbum, setSelectedAlbum] = useState(undefined);
 
-  useEffect(() => {
-    fetch(`/api/random/albums`)
-      .then((res) => res.json())
-      .then((json) => {
-        setAlbums(json.albums);
+  //TODO: this should all be moved to getServerSideProps
+  async function fetchAndInit() {
+    const apiRepsonse = await fetch(`/api/random/albums`);
+    const json = await apiRepsonse.json();
+    setAlbums(json.albums);
+    pickRandomAlbum(json.albums);
+  }
 
-        pickRandomAlbum(json.albums);
-      });
+  useEffect(() => {
+    fetchAndInit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function pickRandomAlbum(explicit) {

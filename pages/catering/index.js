@@ -41,9 +41,13 @@ export default function Catering({}) {
     return await items.json();
   }
 
-  useEffect(async () => {
-    let items = await getCateringItems();
-    setAvailable(items);
+  useEffect(() => {
+    async function fetchAndSetCateringItems() {
+      let items = await getCateringItems();
+      setAvailable(items);
+    }
+
+    fetchAndSetCateringItems();
   }, []);
 
   return (
