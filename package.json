@@ -17,7 +17,7 @@
     "marked": "^4.0.10",
     "mongodb": "^3.5.9",
     "next": "latest",
-    "next-auth": "^3.27.3",
+    "next-auth": "latest",
     "node-fetch": "^2.6.7",
     "query-string": "^7.1.0",
     "react": "^17.0.2",

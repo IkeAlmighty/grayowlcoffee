@@ -1,7 +1,7 @@
 // import App from "next/app";
 import "bootstrap/dist/css/bootstrap.css";
 import "../public/globals.css";
-import { Provider as NextAuthProvider } from "next-auth/client";
+import { Provider as NextAuthProvider } from "next-auth/react";
 
 function App({ Component, pageProps }) {
   return (

@@ -1,4 +1,4 @@
-import { useSession, signOut } from "next-auth/client";
+import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import FlexButton from "./FlexButton";
 import styles from "./Navigation.module.css";

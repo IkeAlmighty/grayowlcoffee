@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import Authorized from "../../components/Authorized";
 import MongoField from "../../components/MongoField";
 import S3Upload from "../../components/S3Upload";

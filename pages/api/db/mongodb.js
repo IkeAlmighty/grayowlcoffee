@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../../../lib/mongodb";
-import { getSession } from "next-auth/client";
+import { getSession } from "next-auth/react";
 import { ObjectID } from "mongodb";
 
 export default async function handler(req, res) {

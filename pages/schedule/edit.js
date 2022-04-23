@@ -1,5 +1,5 @@
 import Navigation from "../../components/Navigation";
-import { signIn, useSession } from "next-auth/client";
+import { signIn, useSession } from "next-auth/react";
 import PersonSelector from "../../components/schedule/PersonSelector";
 
 export default function Schedule() {

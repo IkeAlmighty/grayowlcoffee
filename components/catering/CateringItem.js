@@ -1,7 +1,7 @@
 import S3Image from "../../components/S3Image";
 import S3Upload from "../../components/S3Upload";
 import styles from "./CateringItem.module.css";
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function CateringItem({ item }) {
