@@ -6,3 +6,4 @@ A coffee website for Gray Owl Collective
 
 - NextJS
 - MongoDB
+- Vercel (Deployment)
