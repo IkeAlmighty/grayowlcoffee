@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   background-color: #6e826c;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -12,13 +16,29 @@ input {
 input[type="submit"],
 input[type="button"] {
   border: 1px solid black;
-  box-shadow: -3px 3px darkslategray;
+  box-shadow: -3px 3px whitesmoke;
   cursor: pointer;
+  background-color: rgb(31, 31, 31);
+  color: whitesmoke;
+  margin-left: 3px;
+  margin-bottom: 3px;
 }
 
 input[type="submit"]:hover,
 input[type="button"]:hover {
   opacity: 0.7;
+}
+
+h1 {
+  @apply text-5xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-3xl;
 }
 
 .text-button {
