@@ -45,14 +45,18 @@ export default function MongoField({
     return json;
   }
 
-  useEffect(async () => {
-    if (!initial) {
-      const val = await readDatabaseValue(collection, field, query);
-      setValue(val);
-    } else {
-      setValue(initial);
+  useEffect(() => {
+    async function fetchAndSetDbValue() {
+      if (!initial) {
+        const val = await readDatabaseValue(collection, field, query);
+        setValue(val);
+      } else {
+        setValue(initial);
+      }
     }
-  }, []);
+
+    fetchAndSetDbValue();
+  }, [collection, field, initial, query]);
 
   if (session && session.isAdmin) {
     return (

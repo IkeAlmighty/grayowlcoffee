@@ -16,9 +16,13 @@ export default function S3Browser({ onSelect, buttonValue, className }) {
     setImageKeys([imageKey, ...imageKeys]);
   }
 
-  useEffect(async () => {
-    const keys = await listObjectKeys(); // list up to 1000 image keys
-    setImageKeys(keys);
+  useEffect(() => {
+    async function fetchAndSetObjectKeys() {
+      const keys = await listObjectKeys(); // list up to 1000 image keys
+      setImageKeys(keys);
+    }
+
+    fetchAndSetObjectKeys();
   }, []);
 
   return (

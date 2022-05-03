@@ -14,11 +14,16 @@ export default function Events() {
   const datetimeInput = useRef();
 
   const [events, setEvents] = useState([]);
-  useEffect(async () => {
-    let res = await fetch("/api/db/events", {
-      method: "GET",
-    });
-    setEvents(await res.json());
+
+  useEffect(() => {
+    async function fetchAndSetEvents() {
+      let res = await fetch("/api/db/events", {
+        method: "GET",
+      });
+      setEvents(await res.json());
+    }
+
+    fetchAndSetEvents();
   }, []);
 
   async function createEvent(e) {

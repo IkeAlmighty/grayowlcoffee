@@ -48,7 +48,7 @@ export default function MarkdownEditor({
   useEffect(() => {
     lastEditTimeStamp.current = Date.now();
 
-    setTimeout(async () => {
+    const timeout = setTimeout(async () => {
       if (lastEditTimeStamp.current) {
         // console.log(Date.now(), lastEditTimeStamp.current);
         if (Date.now() - lastEditTimeStamp.current >= 900) {
@@ -58,7 +58,9 @@ export default function MarkdownEditor({
         }
       }
     }, 1000);
-  }, [_markdown]);
+
+    timeout();
+  }, [_markdown, _title, onSave]);
 
   // setInterval(async () => {
   //   await onSave({ title: _title, markdown: _markdown });

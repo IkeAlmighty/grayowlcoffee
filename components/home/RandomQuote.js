@@ -10,8 +10,12 @@ export default function QuoteOfDay({ className }) {
     return json[Math.floor(Math.random() * json.length)];
   }
 
-  useEffect(async () => {
-    setQuote(await getQuote());
+  useEffect(() => {
+    async function fetchAndSetQuote() {
+      setQuote(await getQuote());
+    }
+
+    fetchAndSetQuote();
   }, []);
 
   return (
