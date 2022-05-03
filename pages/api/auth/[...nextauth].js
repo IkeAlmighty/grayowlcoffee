@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import GoogleProvider from "next-auth/providers/google";
 import { connectToDatabase } from "../../../lib/mongodb";
 
 export default NextAuth({
@@ -9,7 +9,7 @@ export default NextAuth({
     //   clientId: process.env.SLACK_CLIENT_ID,
     //   clientSecret: process.env.SLACK_CLIENT_SECRET,
     // }),
-    Providers.Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),

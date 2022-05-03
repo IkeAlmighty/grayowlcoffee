@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function CateringItem({ item }) {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
   const [imageKey, setImageKey] = useState(item.imageKey);
 
   async function updateImageKey(newImageKey) {

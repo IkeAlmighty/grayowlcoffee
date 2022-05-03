@@ -1,7 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import FlexButton from "./FlexButton";
 export default function Login() {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
 
   return (
     <div>

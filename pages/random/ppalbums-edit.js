@@ -4,7 +4,7 @@ import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums-edit.module.css";
 
 export default function EditPPAlbums() {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
   const [albums, setAlbums] = useState([]);
 
   const [newAlbumName, setNewAlbumName] = useState("");
@@ -39,7 +39,7 @@ export default function EditPPAlbums() {
   }
   return (
     <div className={styles.container}>
-      {!loading && session?.isAdmin && (
+      {!status && session?.isAdmin && (
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -60,7 +60,7 @@ export default function EditPPAlbums() {
         {albums.map((album) => (
           <div key={album} className={`${styles.dbItem}`}>
             <div className={styles.dbItemText}>{album}</div>
-            {!loading && session?.isAdmin && (
+            {!status && session?.isAdmin && (
               <div className="text-right">
                 <FlexButton
                   text="Delete"

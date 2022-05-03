@@ -11,7 +11,7 @@ export default function MongoField({
 }) {
   const [value, setValue] = useState(undefined);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
 
   async function updateDatabaseValue(e) {
     e.preventDefault();

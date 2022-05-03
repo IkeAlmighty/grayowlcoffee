@@ -4,7 +4,7 @@ import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums.module.css";
 
 export default function PlausiblyPerfectAlbums() {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
 
   const [albums, setAlbums] = useState([]);
 

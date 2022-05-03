@@ -4,7 +4,7 @@ import FlexButton from "./FlexButton";
 import styles from "./Navigation.module.css";
 
 export default function Navigation() {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
   const [phrase, setPhrase] = useState("");
   const phrases = [
     "Coffee is like the wind. Always in my mouth.",

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getSession } from "next-auth/react";
 import Authorized from "../../components/Authorized";
 import MongoField from "../../components/MongoField";
 import S3Upload from "../../components/S3Upload";
@@ -7,7 +6,7 @@ import S3Image from "../../components/S3Image";
 import styles from "./index.module.css";
 import Link from "next/link";
 
-export default function Admin({ session }) {
+export default function Admin() {
   const [admins, setAdmins] = useState([]);
 
   const [newName, setNewName] = useState("");
@@ -63,11 +62,8 @@ export default function Admin({ session }) {
 
   return (
     <Authorized>
-      <div className="container my-3">
-        <h2>
-          Welcome to the ADMINISTRATION console, Barista-
-          {session?.user.name.split(" ")[1]}
-        </h2>
+      <div className="m-3">
+        <h2>Welcome to the ADMINISTRATION console</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -75,7 +71,7 @@ export default function Admin({ session }) {
           }}
         >
           <input
-            id="newName"
+            className="mr-2"
             type="text"
             placeholder="name"
             value={newName}
@@ -84,6 +80,7 @@ export default function Admin({ session }) {
             }}
           />
           <input
+            className="mr-2"
             type="email"
             placeholder="email"
             value={newEmail}
@@ -93,11 +90,12 @@ export default function Admin({ session }) {
           />
           <input type="submit" value="Add Admin" />
         </form>
+
         {showAdminPanel &&
           admins.map((admin) => {
             let query = { email: admin.email };
             return (
-              <div key={admin.email} className={styles.adminInfo}>
+              <div key={admin.email}>
                 <div className={styles.adminFormElement}>
                   <MongoField
                     initial={admin.name}
@@ -174,8 +172,4 @@ export default function Admin({ session }) {
       </div>
     </Authorized>
   );
-}
-
-export async function getServerSideProps(context) {
-  return { props: { session: await getSession(context) } };
 }

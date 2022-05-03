@@ -3,7 +3,7 @@ import { signIn, useSession } from "next-auth/react";
 import PersonSelector from "../../components/schedule/PersonSelector";
 
 export default function Schedule() {
-  const [session, loading] = useSession();
+  const { session, status } = useSession();
 
   if (!loading && !session)
     return (
