@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Location from "../components/home/Location";
 import MarqueeImage from "../components/MarqueeImage";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/events/EventCard";
 import { connectToDatabase } from "../lib/mongodb";
 import Navigation from "../components/Navigation";
 import FlexButton from "../components/FlexButton";
 import styles from "./index.module.css";
+import Image from "next/image";
 
 export default function Home({ events }) {
   return (
@@ -15,25 +16,31 @@ export default function Home({ events }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <span className={`header`}>Gray Owl Coffee</span> */}
-      <Navigation />
-      <div className="go-container with-header">
-        <MarqueeImage />
-        <hr />
+
+      <div className="with-header">
+        <div className="w-full lg:w-1/2">
+          <MarqueeImage />
+        </div>
 
         {/* various doodads */}
-        <div className="mx-3 text-center">
-          {/* <h1 className="mt-3">Catering Menu</h1> */}
-          {/* <S3Image imageKey={"catering-menu.jpeg"} /> */}
-          <div className={`${styles.cateringContainer}`}>
-            <a href="tel:4057012929">Call Us</a> to make a catering order.
+        <div className="mx-3 text-center my-20">
+          <div className="">
+            <div className="w-[100px] inline-block overflow-hidden rounded">
+              <Image
+                src="/phone.gif"
+                layout="responsive"
+                width={40}
+                height={40}
+                alt=""
+              />
+            </div>
+            <div className="text-2xl">
+              <a className="text-4xl" href="tel:4057012929">
+                Call Us
+              </a>{" "}
+              to make a catering order.
+            </div>
           </div>
-
-          <h3>Random Owlian Things</h3>
-          <FlexButton
-            className="my-3"
-            href="/random/ppalbums"
-            text="'Plausibly Perfect' Albums"
-          />
         </div>
 
         {/* Spacer Div: */}
@@ -55,6 +62,8 @@ export default function Home({ events }) {
           </div>
         </div>
       </div>
+
+      <Navigation />
 
       <footer className={`mt-1 footer`}>
         <Location className="d-inline-block" />
