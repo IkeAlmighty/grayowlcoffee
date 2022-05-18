@@ -15,47 +15,52 @@ export default function Home({ events }) {
         <title>Gray Owl Coffee</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <span className={`header`}>Gray Owl Coffee</span> */}
 
-      <div className="with-header with-footer">
-        <div className="w-full lg:w-1/2">
-          <MarqueeImage />
+      <div className="with-header grid grid-cols-1 lg:grid-cols-2">
+        <div className="overflow-hidden rounded-md">
+          <Image
+            src="/marqueeimg.jpeg"
+            layout="responsive"
+            width={993}
+            height={510}
+            alt=""
+          />
         </div>
 
-        {/* various doodads */}
-        <div className="mx-3 text-center my-20">
-          <div className="">
-            <div className="w-[100px] inline-block overflow-hidden rounded">
-              <Image
-                src="/phone.gif"
-                layout="responsive"
-                width={40}
-                height={40}
-                alt=""
-              />
-            </div>
-            <div className="text-2xl">
-              <a className="text-4xl" href="tel:4057012929">
-                Call Us
-              </a>{" "}
-              to make a catering order.
-            </div>
+        {/* Catering */}
+        <div className="m-auto w-full text-center my-20">
+          <div className="w-[100px] inline-block overflow-hidden rounded">
+            <Image
+              src="/phone.gif"
+              layout="responsive"
+              width={40}
+              height={40}
+              alt=""
+            />
+          </div>
+          <div className="text-2xl">
+            <a className="text-4xl" href="tel:4057012929">
+              Call Us
+            </a>{" "}
+            to make a catering order.
           </div>
         </div>
+      </div>
 
-        {/* event list: */}
-        <div className="mx-auto max-w-[400px]">
-          {events.map((event) => (
-            <div className="" key={JSON.stringify(event)}>
-              <EventCard
-                title={event.title}
-                detailsMarkdown={event.details}
-                datetime={event.datetime}
-                imageKey={event.imageKey}
-              />
-            </div>
-          ))}
-        </div>
+      {/* event list: */}
+
+      <div className="mx-auto max-w-[400px] my-20">
+        <h2 className="text-center">Events</h2>
+        {events.map((event) => (
+          <div className="" key={JSON.stringify(event)}>
+            <EventCard
+              title={event.title}
+              detailsMarkdown={event.details}
+              datetime={event.datetime}
+              imageKey={event.imageKey}
+            />
+          </div>
+        ))}
       </div>
 
       <Navigation />
