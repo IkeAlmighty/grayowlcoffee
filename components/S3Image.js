@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchImageUrl } from "../s3";
+import { fetchImageURL } from "../lib/s3";
 import Image from "next/image";
 
 // FIXME: this component needs updated so that it can work optionally
@@ -11,7 +11,7 @@ export default function S3Image({ imageKey, alt, className }) {
     if (!imageKey) return;
 
     async function _fetchImageUrl() {
-      const { url } = await fetchImageUrl(imageKey);
+      const { url } = await fetchImageURL(imageKey);
       setURL(url);
     }
 
@@ -21,14 +21,16 @@ export default function S3Image({ imageKey, alt, className }) {
   return (
     // Use Nextjs Image tag because it won't build otherwise
     <div
-      style={{ width: "100%", minHeight: "100px", position: "relative" }}
+      style={{
+        height: "100%",
+        position: "relative",
+      }}
       className={className}
     >
       <Image
         src={url ? url : "/404.png"}
         alt={alt ? alt : "image did not load"}
         layout="fill"
-        objectFit="contain"
       />
     </div>
   );
