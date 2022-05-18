@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { uploadImage } from "../lib/s3";
 
-export default function S3Upload({ label, onUpload, className, style }) {
+export default function S3Upload({ label, onUpload, className }) {
   const fileupload = useRef(null);
   return (
     <>
@@ -9,11 +9,6 @@ export default function S3Upload({ label, onUpload, className, style }) {
       as a proxy and hide the actual file input: */}
       <input
         className={className}
-        style={
-          style && !className
-            ? style
-            : { display: "block", margin: "auto auto", margin: "10px" }
-        }
         type="button"
         value={label ? label : "Upload Image"}
         onClick={() => {
