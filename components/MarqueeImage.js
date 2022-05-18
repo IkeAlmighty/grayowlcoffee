@@ -1,11 +1,15 @@
-import { useEffect } from "react";
-import S3Image from "./S3Image";
+import Image from "next/image";
 
 export default function MarqueeImage() {
-  useEffect(() => {}, []);
   return (
-    <div>
-      <S3Image imageKey="marqueeimg.jpeg" />
+    <div className="overflow-hidden rounded-md">
+      <Image
+        src="/marqueeimg.jpeg"
+        layout="responsive"
+        width={993}
+        height={510}
+        alt=""
+      />
     </div>
   );
 }
