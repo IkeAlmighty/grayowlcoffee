@@ -17,7 +17,7 @@ export default function Home({ events }) {
       </Head>
       {/* <span className={`header`}>Gray Owl Coffee</span> */}
 
-      <div className="with-header">
+      <div className="with-header with-footer">
         <div className="w-full lg:w-1/2">
           <MarqueeImage />
         </div>
@@ -43,23 +43,18 @@ export default function Home({ events }) {
           </div>
         </div>
 
-        {/* Spacer Div: */}
-        <div style={{ height: "200px" }} />
-
         {/* event list: */}
-        <div className="mx-auto w-100 container">
-          <div className="row">
-            {events.map((event) => (
-              <div key={event._id} className="col-lg-6">
-                <EventCard
-                  title={event.title}
-                  detailsMarkdown={event.details}
-                  datetime={event.datetime}
-                  imageKey={event.imageKey}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto max-w-[400px]">
+          {events.map((event) => (
+            <div className="" key={JSON.stringify(event)}>
+              <EventCard
+                title={event.title}
+                detailsMarkdown={event.details}
+                datetime={event.datetime}
+                imageKey={event.imageKey}
+              />
+            </div>
+          ))}
         </div>
       </div>
 
@@ -80,11 +75,8 @@ export async function getServerSideProps(context) {
 
   const events = await db
     .collection("events")
-    .aggregate([
-      {
-        $project: { _id: { $toString: "$_id" } },
-      },
-    ])
+    .find({})
+    .project({ _id: 0 })
     .toArray();
 
   return { props: { events } };

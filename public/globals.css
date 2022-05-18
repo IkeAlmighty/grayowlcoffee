@@ -76,6 +76,10 @@ h3 {
   margin-top: 60px;
 }
 
+.with-footer {
+  margin-bottom: 60px;
+}
+
 a {
   color: whitesmoke;
 }
