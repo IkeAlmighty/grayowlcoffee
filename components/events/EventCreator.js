@@ -1,17 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import EventCard from "../../components/EventCard";
-import S3Upload from "../../components/S3Upload";
-import styles from "./events.module.css";
+import EventCard from "./EventCard";
+import S3Upload from "../S3Upload";
+import styles from "./EventCreator.module.css";
 
-export default function Events() {
+export default function EventCreator() {
   const [details, setDetails] = useState("");
   const [title, setTitle] = useState("");
   const [datetime, setDatetime] = useState("");
   const [imageKey, setImageKey] = useState("");
-
-  const detailsInput = useRef();
-  const titleInput = useRef();
-  const datetimeInput = useRef();
 
   const [events, setEvents] = useState([]);
 
@@ -26,8 +22,7 @@ export default function Events() {
     fetchAndSetEvents();
   }, []);
 
-  async function createEvent(e) {
-    e.preventDefault();
+  async function createEvent() {
     const event = { details, title, datetime, imageKey };
 
     let res = await fetch("/api/db/events", {
@@ -42,9 +37,8 @@ export default function Events() {
 
     if (res.status === 201) {
       setEvents([...events, event]);
-      titleInput.current.value = "";
-      detailsInput.current.value = "";
-      datetimeInput.current.value = "";
+
+      // clear fields:
       setImageKey("");
       setDetails("");
       setTitle("");
@@ -66,57 +60,51 @@ export default function Events() {
   }
 
   return (
-    <div className="go-container mx-auto my-3 px-3">
-      <h2>Publish an Event</h2>
+    <div>
+      <h2>Publish a Shop Event</h2>
       <hr />
-      <form className="container" onSubmit={(e) => createEvent(e)}>
-        <div className="row my-3">
-          <label className="col-sm my-auto">Title</label>
-
+      <div onSubmit={(e) => e.preventDefault()}>
+        <div className="my-6">
+          <div>Title</div>
           <input
-            ref={titleInput}
-            className="col-sm"
+            className="w-full"
             type="text"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
 
-        <div className="row my-3">
-          <label className="col-sm my-auto">Details</label>
-
+        <div className="my-6">
+          <div>Details</div>
           <textarea
-            ref={detailsInput}
-            className="col-sm"
+            className="h-[200px] w-full p-3 text-lg"
+            value={details}
             onChange={(e) => setDetails(e.target.value)}
           />
         </div>
 
-        <div className="row my-3">
-          <label className="col-sm my-auto">Date</label>
-
+        <div className="my-6">
+          <div>Date</div>
           <input
-            ref={datetimeInput}
-            className="col-sm"
             type="datetime-local"
-            onChange={(e) => {
-              setDatetime(e.target.value);
-            }}
+            value={datetime}
+            onChange={(e) => setDatetime(e.target.value)}
           />
         </div>
 
-        <div className="row my-3">
-          <label className="col-sm my-auto">Upload an Image: </label>
-
-          <S3Upload
-            className="col-sm"
-            onUpload={(imageKey) => setImageKey(imageKey)}
-          />
+        <div className="my-6">
+          <S3Upload onUpload={(imageKey) => setImageKey(imageKey)} />
         </div>
 
-        <input type="submit" value="Create Event" />
-      </form>
-      <h2 className="mt-3">Preview</h2>
-      <div className={styles.cardContainer}>
+        <div className="my-6 text-3xl">
+          <span className="text-button" onClick={() => createEvent()}>
+            Create Event
+          </span>
+        </div>
+      </div>
+
+      <h2>Preview</h2>
+      <div>
         <EventCard
           title={title}
           detailsMarkdown={details}
@@ -125,12 +113,12 @@ export default function Events() {
         />
       </div>
 
-      <div style={{ height: "100px" }} />
-      <h1 className="mt-3">Events Published</h1>
+      <div />
+      <h1 className="mt-20">Events Published</h1>
       <hr />
-      <div className="mx-auto">
+      <div>
         {events.map((event) => (
-          <div className={styles.cardContainer} key={JSON.stringify(event)}>
+          <div key={JSON.stringify(event)}>
             <EventCard
               title={event.title}
               detailsMarkdown={event.details}
@@ -145,6 +133,10 @@ export default function Events() {
           </div>
         ))}
       </div>
+
+      {events.length === 0 && (
+        <div className="my-20">Nothing Goin&apos; On Here...</div>
+      )}
     </div>
   );
 }

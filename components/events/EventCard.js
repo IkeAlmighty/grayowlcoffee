@@ -1,6 +1,6 @@
 import { marked } from "marked";
-import S3Image from "./S3Image";
-import { prettifyTime } from "../lib/datetime";
+import S3Image from "../S3Image";
+import { prettifyTime } from "../../lib/datetime";
 import styles from "./EventCard.module.css";
 
 export default function EventCard({
