@@ -6,9 +6,9 @@
 import { useClientSideAuth } from "../lib/auth";
 import Link from "next/link";
 export default function Authorized({ children }) {
-  const [isAdmin, loading] = useClientSideAuth();
+  const [isAdmin, status] = useClientSideAuth();
 
-  if (loading) return <span>Loading...</span>;
+  if (status === "loading") return <span>Loading...</span>;
   else if (isAdmin) return <>{children}</>;
   else
     return (
