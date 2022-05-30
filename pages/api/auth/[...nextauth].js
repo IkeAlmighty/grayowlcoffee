@@ -16,7 +16,7 @@ export default NextAuth({
     // ...add more providers here
   ],
   callbacks: {
-    jwt: async (token, account) => {
+    jwt: async ({ token }) => {
       // if it's my email, then it's an admin:
       // if (token.email === "isaacyates7@gmail.com") token.isAdmin = true;
 
@@ -32,7 +32,7 @@ export default NextAuth({
 
       return token;
     },
-    session: async (session, token) => {
+    session: async ({ session, token }) => {
       session.isAdmin = token.isAdmin;
       return session;
     },
