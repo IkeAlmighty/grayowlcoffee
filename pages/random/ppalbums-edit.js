@@ -1,10 +1,9 @@
-import { useSession } from "next-auth/react";
+import { getSession } from "../../lib/auth";
 import { useEffect, useState } from "react";
 import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums-edit.module.css";
 
-export default function EditPPAlbums() {
-  const { session, status } = useSession();
+export default function EditPPAlbums({ session }) {
   const [albums, setAlbums] = useState([]);
 
   const [newAlbumName, setNewAlbumName] = useState("");
@@ -75,4 +74,9 @@ export default function EditPPAlbums() {
       </div>
     </div>
   );
+}
+
+export function getServerSideProps(context) {
+  const session = getSession(context);
+  return { props: { session } };
 }

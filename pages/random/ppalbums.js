@@ -1,11 +1,9 @@
-import { useSession } from "next-auth/react";
+import { getSession } from "../../lib/auth";
 import { useEffect, useState } from "react";
 import FlexButton from "../../components/FlexButton";
 import styles from "./ppalbums.module.css";
 
-export default function PlausiblyPerfectAlbums() {
-  const { session, status } = useSession();
-
+export default function PlausiblyPerfectAlbums({ session }) {
   const [albums, setAlbums] = useState([]);
 
   const [selectedAlbum, setSelectedAlbum] = useState(undefined);
@@ -57,4 +55,10 @@ export default function PlausiblyPerfectAlbums() {
       />
     </div>
   );
+}
+
+export function getServerSideProps(context) {
+  const session = getSession(context);
+
+  return { props: { session } };
 }

@@ -1,22 +1,22 @@
 // This component should be used for content that is strictly admin only.
 // Example use:
-// <Authorized>
+// <Authorized session={session}>
 //      <div> This is a secret admin dashboard </div>
 // </Authorized>
-import { useClientSideAuth } from "../lib/auth";
-import Link from "next/link";
-export default function Authorized({ children }) {
-  const [isAdmin, status] = useClientSideAuth();
 
-  if (status === "loading") return <span>Loading...</span>;
-  else if (isAdmin) return <>{children}</>;
+// session object should be grabbed and passed to component
+// via getServerSideProps
+
+import Link from "next/link";
+export default function Authorized({ session, children }) {
+  if (session.role === "admin") return <>{children}</>;
   else
     return (
       <div>
         You are not authorized to view this page. If you are a gray owl
-        employee, you can login at &nbsp;
-        <Link href="/login">
-          <a>grayowl.coffee/login</a>
+        employee, you can &nbsp;
+        <Link href="/api/auth/google">
+          <a>login here</a>
         </Link>
       </div>
     );
