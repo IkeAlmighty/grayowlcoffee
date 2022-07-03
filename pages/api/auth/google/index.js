@@ -11,8 +11,6 @@ export default async function handler(req, res) {
     GOOGLE_REDIRECT_URL
   );
 
-  console.log("redirect uri: ", GOOGLE_REDIRECT_URL);
-
   const url = oauth2Client.generateAuthUrl({
     scope: ["profile", "email"],
   });
