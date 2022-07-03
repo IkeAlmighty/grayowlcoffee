@@ -7,8 +7,9 @@ import Navigation from "../components/Navigation";
 import FlexButton from "../components/FlexButton";
 import styles from "./index.module.css";
 import Image from "next/image";
+import { getSession } from "../lib/auth";
 
-export default function Home({ events }) {
+export default function Home({ events, session }) {
   return (
     <>
       <Head>
@@ -63,7 +64,7 @@ export default function Home({ events }) {
         ))}
       </div>
 
-      <Navigation />
+      <Navigation session={session} />
 
       <footer className={`mt-1 footer`}>
         <Location className="d-inline-block" />
@@ -84,5 +85,7 @@ export async function getServerSideProps(context) {
     .project({ _id: 0 })
     .toArray();
 
-  return { props: { events } };
+  const session = getSession(context);
+
+  return { props: { events, session } };
 }
