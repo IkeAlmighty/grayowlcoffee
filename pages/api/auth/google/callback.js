@@ -15,6 +15,8 @@ const GOOGLE_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
 export default async function handler(req, res) {
   const { code } = req.query;
 
+  console.log("redirect uri: ", GOOGLE_REDIRECT_URL);
+
   // grab user information from google client:
   const oauth2Client = new google.auth.OAuth2(
     GOOGLE_ID,
